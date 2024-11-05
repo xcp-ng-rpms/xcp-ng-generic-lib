@@ -4,7 +4,7 @@
 
 Name:           xcp-ng-generic-lib
 Version:        1.1.1
-Release:        4%{?dist}
+Release:        4.1%{?dist}
 Summary:        A library of algorithms, I/O and networking functions
 License:        GPLv3
 URL:            https://github.com/xcp-ng/xcp-ng-generic-lib
@@ -22,14 +22,11 @@ A library of algorithms, I/O and networking functions... used by XCP-ng tools or
 %autosetup -p1
 
 %build
-mkdir build
-cd build
-%cmake3 ..
-make
+%cmake3
+make -C redhat-linux-build
 
 %install
-cd build
-%make_install
+%make_install -C redhat-linux-build
 
 %files
 %license LICENSE
@@ -62,6 +59,9 @@ This package provides documentation and development headers for xcp-ng-generic-l
 %{_libdir}/libxcp-ng-generic.so
 
 %changelog
+* Tue Nov 05 2024 Yann Dirson <yann.dirson@vates.tech> - 1.1.1-4.1
+- Fix use of build subdir, the way it was done confuses Alma 10
+
 * Fri Sep 16 2022 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.1.1-4
 - Rebuild for XCP-ng 8.3
 
