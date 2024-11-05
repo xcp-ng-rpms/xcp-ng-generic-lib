@@ -1,0 +1,35 @@
+From eac585fccb86d3ca858ecbce6dcef4e2823bc6e1 Mon Sep 17 00:00:00 2001
+From: Yann Dirson <yann.dirson@vates.tech>
+Date: Tue, 5 Nov 2024 17:33:50 +0100
+Subject: [PATCH] Update API for libbfd in Alma 10
+
+---
+ src/stacktrace.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/stacktrace.c b/src/stacktrace.c
+index a41fb1a..00e02cd 100644
+--- a/src/stacktrace.c
++++ b/src/stacktrace.c
+@@ -91,15 +91,15 @@ static int read_symbols (bfd *bin, asymbol ***symbols) {
+ // -----------------------------------------------------------------------------
+ 
+ static bool find_physical_address_info (bfd *bin, asection *section, asymbol **symbols, SymbolInfo *info) {
+-  if ((bfd_get_section_flags(bin, section) & SEC_ALLOC) == 0)
++  if ((bfd_section_flags(section) & SEC_ALLOC) == 0)
+     return false; // No debug info in this section.
+ 
+   const bfd_vma physAddress = (bfd_vma)info->physAddress;
+-  const bfd_vma vma = bfd_get_section_vma(bin, section);
++  const bfd_vma vma = bfd_section_vma(section);
+   if (physAddress < vma)
+     return false;
+ 
+-  const bfd_size_type size = bfd_section_size(bin, section);
++  const bfd_size_type size = bfd_section_size(section);
+   if (physAddress >= vma + size)
+     return false;
+ 
+-- 
+2.39.5
+
