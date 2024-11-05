@@ -10,6 +10,8 @@ License:        GPLv3
 URL:            https://github.com/xcp-ng/xcp-ng-generic-lib
 Source0:        https://github.com/xcp-ng/xcp-ng-generic-lib/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch1:         0001-Update-API-for-libbfd-in-Alma-10.patch
+#Patch2:         0001-Fix-wrong-integer-signedness.patch
+Patch3:         0002-Fix-wrong-integer-signedness.patch
 
 BuildRequires:  cmake3
 BuildRequires:  make
@@ -63,6 +65,7 @@ This package provides documentation and development headers for xcp-ng-generic-l
 * Tue Nov 05 2024 Yann Dirson <yann.dirson@vates.tech> - 1.1.1-4.1
 - Fix use of build subdir, the way it was done confuses Alma 10
 - Patch to adjust to libbfd API change
+- Patch to fix signedness issue caught by newer gcc
 
 * Fri Sep 16 2022 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.1.1-4
 - Rebuild for XCP-ng 8.3

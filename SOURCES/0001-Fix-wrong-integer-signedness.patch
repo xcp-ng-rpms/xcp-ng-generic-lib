@@ -1,0 +1,26 @@
+From feeefaa481d5110bd795b48bc0cb607604bff719 Mon Sep 17 00:00:00 2001
+From: Yann Dirson <yann.dirson@vates.tech>
+Date: Tue, 5 Nov 2024 17:56:23 +0100
+Subject: [PATCH 1/2] Fix wrong integer signedness
+
+---
+ src/stacktrace.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/stacktrace.c b/src/stacktrace.c
+index 00e02cd..6bd017b 100644
+--- a/src/stacktrace.c
++++ b/src/stacktrace.c
+@@ -239,7 +239,8 @@ static char **stacktrace_symbols (void *const *buffer, size_t size) {
+ 
+   char *data = (char *)(strings + size);
+ 
+-  for (int j = (int)size - 1; j >= 0; --j) {
++  for (unsigned jj = (unsigned)size; jj >= 1; --jj) {
++    unsigned j = jj - 1;
+     const size_t offset = (size_t)sprintf(data, "#%-*u", sizeLength, j);
+     strcpy(data + offset, locations[j]);
+     strings[j] = data;
+-- 
+2.39.5
+

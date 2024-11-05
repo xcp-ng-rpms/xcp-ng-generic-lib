@@ -1,0 +1,25 @@
+From a5ce2e6f6cb61c3887d86e68859ca1d1699a39cf Mon Sep 17 00:00:00 2001
+From: Yann Dirson <yann.dirson@vates.tech>
+Date: Tue, 5 Nov 2024 18:03:25 +0100
+Subject: [PATCH 2/2] Fix wrong integer signedness
+
+---
+ src/stacktrace.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/stacktrace.c b/src/stacktrace.c
+index 6bd017b..257e26e 100644
+--- a/src/stacktrace.c
++++ b/src/stacktrace.c
+@@ -229,7 +229,7 @@ static char **stacktrace_symbols (void *const *buffer, size_t size) {
+   // strings contains:
+   // One big string at end containing all symbol strings.
+   // `size` pointers on the big string.
+-  const int sizeLength = (int)log10((double)XCP_MAX(1u, size - 1)) + 2;
++  const unsigned sizeLength = (unsigned)log10((double)XCP_MAX(1u, size - 1)) + 2;
+   // `sizeLength + 1` because there is a `#` in the front of frame. ;)
+   charCount += (size_t)(sizeLength + 1) * size;
+ 
+-- 
+2.39.5
+
