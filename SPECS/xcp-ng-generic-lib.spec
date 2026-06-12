@@ -4,7 +4,7 @@
 
 Name:           xcp-ng-generic-lib
 Version:        1.1.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A library of algorithms, I/O and networking functions
 License:        GPLv3
 URL:            https://github.com/xcp-ng/xcp-ng-generic-lib
@@ -14,6 +14,8 @@ BuildRequires:  cmake3
 BuildRequires:  make
 BuildRequires:  gcc
 BuildRequires:  binutils-devel
+# Ensure _vpath_builddir is defined
+BuildRequires:  epel-rpm-macros
 
 %description
 A library of algorithms, I/O and networking functions... used by XCP-ng tools or daemons.
@@ -22,13 +24,12 @@ A library of algorithms, I/O and networking functions... used by XCP-ng tools or
 %autosetup -p1
 
 %build
-mkdir build
-cd build
-%cmake3 ..
+%cmake3
+cd %{_vpath_builddir}
 make
 
 %install
-cd build
+cd %{_vpath_builddir}
 %make_install
 
 %files
@@ -62,6 +63,9 @@ This package provides documentation and development headers for xcp-ng-generic-l
 %{_libdir}/libxcp-ng-generic.so
 
 %changelog
+* Thu Jul 17 2025 Andrii Sultanov <andriy.sultanov@vates.tech> - 1.1.1-5
+- Fix build that was failing because of cmake3 update
+
 * Fri Sep 16 2022 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.1.1-4
 - Rebuild for XCP-ng 8.3
 
