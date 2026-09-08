@@ -10,6 +10,8 @@ License:        GPLv3
 URL:            https://github.com/xcp-ng/xcp-ng-generic-lib
 Source0:        https://github.com/xcp-ng/xcp-ng-generic-lib/archive/v%{version}/%{name}-%{version}.tar.gz
 
+Patch1:         0001-Update-API-for-libbfd-in-Alma-10.patch
+
 BuildRequires:  cmake3
 BuildRequires:  make
 BuildRequires:  gcc
@@ -65,6 +67,7 @@ This package provides documentation and development headers for xcp-ng-generic-l
 * Tue Sep 08 2026 Julian Vetter <julian.vetter@vates.tech> - 1.2.0-1
 - Update to 1.2.0
 - Use the modern cmake3 macros (cmake3_build / cmake3_install)
+- Add patch porting the libbfd section accessors to the binutils >= 2.34 API
 
 * Fri Sep 16 2022 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.1.1-4
 - Rebuild for XCP-ng 8.3
