@@ -31,7 +31,7 @@ A library of algorithms, I/O and networking functions... used by XCP-ng tools or
 %files
 %license LICENSE
 %{_libdir}/libxcp-ng-generic.so.1
-%{_libdir}/libxcp-ng-generic.so.%{version}
+%{_libdir}/libxcp-ng-generic.so.1.2.0
 
 %package devel
 Summary:        Development headers for xcp-ng-generic-lib
